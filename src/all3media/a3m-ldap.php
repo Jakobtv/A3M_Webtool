@@ -3,8 +3,8 @@ session_start();
 error_reporting(E_ERROR);
 include 'a3m-header.php';
 if ($_SESSION['a3m_logged_in'] == true) {
-    #header("Location: create-a3m-user.php");
-    #exit();
+    header("Location: create-a3m-user.php");
+    exit();
 } else
 
 ?>

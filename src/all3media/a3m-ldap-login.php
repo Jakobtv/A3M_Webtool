@@ -9,10 +9,10 @@ $dotenv->load();
 include_once 'a3m-ldap.php';
 
 // Daten zur Authentifizierung
-$domain = $_ENV['LDAP_DOMAIN']; // Domain für die LDAP-Authentifizierung
-$ldapconfig['host'] = $_ENV['LDAP_HOST']; // LDAP-Server-Name
-$ldapconfig['port'] = $_ENV['LDAP_PORT']; // LDAP-Standart-Port = 389
-$ldapconfig['basedn'] = $_ENV['LDAP_DN']; // Base-DN (Distinguished-Name)
+$domain = $_ENV['A3M_LDAP_DOMAIN']; // Domain für die LDAP-Authentifizierung
+$ldapconfig['host'] = $_ENV['A3M_LDAP_HOST']; // LDAP-Server-Name
+$ldapconfig['port'] = $_ENV['A3M_LDAP_PORT']; // LDAP-Standart-Port = 389
+$ldapconfig['basedn'] = $_ENV['A3M_LDAP_DN']; // Base-DN (Distinguished-Name)
 
 // $ds stellt eine Verbindung zum LDAP-Server her
 $ds = ldap_connect($ldapconfig['host'], $ldapconfig['port']);
