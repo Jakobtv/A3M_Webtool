@@ -1,7 +1,7 @@
-* { 
+body { 
     background-color: #e5eaf5; 
     text-align: center; 
-    font-family:Arial, Helvetica, sans-serif
+    font-family:Arial, Helvetica, sans-serif;
 } 
 @font-face {
     font-family: "League Spartan";
@@ -26,7 +26,7 @@
     color: white;
     font-weight: 100;
     border-radius: 10px;
-    background: #494d5f;
+    background-color: #494d5f;
     padding: 20px;
     width: 200px;
     height: 100px; 
@@ -34,6 +34,90 @@
     font-size: 15px; 
     text-align: center; 
     cursor: pointer;
+}
+.form-container {
+    max-width: 600px;
+    margin: 30px auto 0px;
+    background-color: white;
+    box-shadow: 
+        0 10px 15px rgba(0, 0, 0, 0.2), 
+        0 4px 6px rgba(0, 0, 0, 0.1), 
+        0 20px 30px rgba(0, 0, 0, 0.05);
+    padding: 50px 40px;
+}
+.button-container {
+    display: flex; /* Die Buttons nebeneinander anordnen */
+    justify-content: center; /* Die Buttons horizontal zentrieren */
+    gap: 10px; /* Abstand zwischen den Buttons */
+    margin-top: 20px; /* Optional: Abstand nach oben */
+}
+h2 {
+    max-width: 600px;
+    text-align: center;
+    margin: 0px auto 20px;
+}
+#input-form {
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 10px;
+    background-color: white;    
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+    width: 100%;
+}
+.form-group label {
+    width: 300px;
+    text-align: left;
+    font-weight: bold;
+    color: #494d5f;
+    font-size: 18px;
+    margin-bottom: 2px;
+}
+.form-group input,
+.form-group select {
+    max-width: 500px;
+    min-height: 24px;
+    padding: 5px;
+    font-size: 16px;
+    border: 2px solid #D1D5DB;
+    border-radius: 5px;
+    background-color: white;
+}
+.form-group input:focus,
+.form-group select:focus {
+    border: 2px solid #494d5f;
+}
+.form-group input:focus-visible,
+.form-group select:focus-visible {
+    outline: none;
+}
+.form-group select {
+    padding: 7.5px
+}
+#submit-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #494d5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    align-self: flex-end;
+    opacity: 0.5;
+}
+#submit-button:hover {
+    opacity: 1;
+    cursor: pointer;
+    transition: 0.2s ease-out;
+}
+#submit-button:active {
+    background-color: #201E26;
+
 }
 #box:hover {
     color: white;
@@ -68,7 +152,6 @@
     transition: all 0.15s ease-in-out;
     font-size: 16px;
     cursor: pointer;
-    align-items: center;
 }
 #backtostart { 
     color: white;
@@ -80,7 +163,7 @@
     text-align: center;
     cursor: pointer;
 }
-#backtostart:hover {
+ #backtostart:hover {
     color: white;
     border-radius: 10px;
     background: #494d5f;
@@ -93,11 +176,14 @@
 #footer {
     height: 20px;
     font-family: "Ubuntu";
-    background-color: rgba(135, 181, 196, 0.185);
+    background-color: #e5eaf5; 
     font-size: 16px;
     align-items: baseline;
     position: fixed;
     left: 0;
     bottom: 0;
     right: 0;
+    z-index: 1;
+    opacity: 1;
+    border-top: 1px solid #D1D5DB;
 }

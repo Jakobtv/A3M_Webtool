@@ -13,104 +13,121 @@ $errormessage = "Bitte tragen Sie alle benötigten Informationen ein!";
 if ($_SESSION['a3m_logged_in'] === true) {?>
     <!DOCTYPE html>
     <html>
-    <script src="../../js/updateOptions.js"></script>
-    <h2>Neuen All3Media-Benutzer anlegen:</h2>
-    <div class="inputForm" id="inputForm">
-        <form method="post">
-        <label for="vorname">Vornamen eingeben:</label>
-        <input type="text" name="vorname" required><br>
-
-        <label for="nachname">Nachnamen eingeben:</label>
-        <input type="text" name="nachname" required><br><br>
-        
-        <label for="standort">Standort auswählen:</label>
-        <select name="standort" id="standort" onchange="updateOptions('standort')" required>
-            <option value="" disabled selected>Bitte auswählen</option>
-
-            <?php 
-            #$ADou1 = array('Berlin', 'Hürth', 'Köln');
-            $ADou1 = array_keys($_SESSION['allous']);
-            
-            $standortOptionen = '';
-            $firmaOptionen = '';
-            $abteilungOptionen = '';
-            
-            // Manuell gefilterte Standorte
-            $excludedStandorte = [
-                'A3MO365Contacts',
-                'Builtin',
-                'Computers',
-                'daniel',
-                'deaktiviert',
-                'desd',
-                'Domain Controllers',
-                'ForeignSecurityPrinciples',
-                'Frontend',
-                'groups_azure_a3md',
-                'groups_azure_tp',
-                'Jakob',
-                'Managed Service Accounts',
-                'Microsoft Exchange Security Groups',
-                'MMEcustomrecipients',
-                'MMEdistributionlists',
-                'MMEgroups',
-                'Servers',
-                'Users',
-                'users_azure_a3m',
-                'users_azure_tp',
-                'z_andere-user-konten',
-                'z_ausgeschieden_konto-aktiv_vor-loeschen-fragen'
-            ];  
-            
-            // Arrays zum Überprüfen von Duplikaten
-            $uniqueStandorte = [];
-            $uniqueFirmen = [];
-            $uniqueAbteilungen = [];
-            
-            foreach ($_SESSION['allous'] as $standort => $firmenArray) {
-                // Filtere den Standort
-                if (!in_array($standort, $uniqueStandorte) && !in_array($standort, $excludedStandorte)) {
-                    $standortOptionen .= sprintf('<option>%s</option>', $standort);
-                    $uniqueStandorte[] = $standort;
-                }
-            };
-            
-            echo $standortOptionen;
-            
-?> </select><br><br>
-
-        <label for="firmen">Firma auswählen:</label>
-        <select name="firmen" id="firmen" onchange="updateOptions('firmen')" required>
-            <option value="" disabled selected>Bitte Standort auswählen</option>
-            
-        </select><br><br>
-
-        <label for="abteilungen">Abteilung auswählen:</label>
-        <select name="abteilungen" id="abteilungen" required>
-            <option value="" disabled selected>Bitte Firma auswählen</option>
-        </select><br><br>
-
-        <label for="position">Position eingeben:</label>
-        <input type="text" name="position" required><br><br>
-
-        <label for="durchwahl">Durchwahl eingeben (Im Zweifel: 0):</label>
-        <input type="number" name="durchwahl" value="0" ><br><br>
-        
-        <label for="ende">Beschäftigungsende angeben:</label>
-        <input type="date" name="ende" required><br><br>
-
-        <label for="office">MS Office (j/n):</label>
-        <select name="office" required>
-            <option value="j">Ja</option>
-            <option value="n">Nein</option>   
-        </select><br><br>
-        
-        <label for="boss">Vorgesetzte:n angeben (Vorname.Nachname):</label><br>
-        <input type="text" name="boss" required><br><br>
-
-        <button type="submit" id="box">Absenden</button>
-        </form>
-    </div>
+        <div class="form-container">
+            <h2>Neuer All3Media-Benutzer</h2>
+            <div class="input-form" id="input-form">
+                <form method="post">
+                    <div class="form-group">
+                        <label for="vorname">Vorname</label>
+                        <input type="text" name="vorname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nachname">Nachname</label>
+                        <input type="text" name="nachname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="standort">Standort</label>
+                        <select name="standort" id="standort" onchange="updateOptions('standort')" required>
+                            <option value="" disabled selected>Bitte auswählen</option>
+                            <?php 
+                            #$ADou1 = array('Berlin', 'Hürth', 'Köln');
+                            $ADou1 = array_keys($_SESSION['allous']);
+                            
+                            $standortOptionen = '';
+                            $firmaOptionen = '';
+                            $abteilungOptionen = '';
+                            
+                            // Manuell gefilterte Standorte
+                            $excludedStandorte = [
+                                'A3MO365Contacts',
+                                'Builtin',
+                                'Computers',
+                                'daniel',
+                                'deaktiviert',
+                                'desd',
+                                'Domain Controllers',
+                                'ForeignSecurityPrinciples',
+                                'Frontend',
+                                'groups_azure_a3md',
+                                'groups_azure_tp',
+                                'Jakob',
+                                'Köln',
+                                'Managed Service Accounts',
+                                'Microsoft Exchange Security Groups',
+                                'MMEcustomrecipients',
+                                'MMEdistributionlists',
+                                'MMEgroups',
+                                'Servers',
+                                'Users',
+                                'users_azure_a3m',
+                                'users_azure_tp',
+                                'z_andere-user-konten',
+                                'z_ausgeschieden_konto-aktiv_vor-loeschen-fragen'
+                            ];  
+                            
+                            // Arrays zum Überprüfen von Duplikaten
+                            $uniqueStandorte = [];
+                            $uniqueFirmen = [];
+                            $uniqueAbteilungen = [];
+                            
+                            foreach ($_SESSION['allous'] as $standort => $firmenArray) {
+                                // Filtere den Standort
+                                if (!in_array($standort, $uniqueStandorte) && !in_array($standort, $excludedStandorte)) {
+                                    $standortOptionen .= sprintf('<option>%s</option>', $standort);
+                                    $uniqueStandorte[] = $standort;
+                                }
+                            }; 
+                            echo $standortOptionen;
+                            ?> 
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="firmen">Firma</label>
+                        <select name="firmen" id="firmen" onchange="updateOptions('firmen')" required>
+                            <option value="" disabled selected>Bitte Standort auswählen</option>              
+                        </select>
+                    </div>    
+                    <div class="form-group">
+                        <label for="abteilungen">Abteilung</label>
+                        <select name="abteilungen" id="abteilungen" onchange="updateOptions('abteilungen')" required>
+                            <option value="" disabled selected>Bitte Firma auswählen</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="position">Position</label>
+                        <input type="text" name="position" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="durchwahl">Durchwahl (Im Zweifel: 0)</label>
+                        <input type="number" name="durchwahl" value="0" >
+                    </div>
+                    <div class="form-group">
+                        <label for="ende">Beschäftigungsende</label>
+                        <input type="date" name="ende" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="office">MS Office</label>
+                        <select name="office" required>
+                            <option value="" disabled selected>Bitte auswählen</option>
+                            <option value="j">Ja</option>
+                            <option value="n">Nein</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="boss">Vorgesetzte:r</label>
+                        <input type="text" name="boss" placeholder="vorname.nachname"required>
+                    </div> 
+                    <div class="form-group"> 
+                        <label for="password">Passwort:</label><br>
+                        <input type="password" id="password" name="password" required><br><br>
+                        <label for="confirmPassword">Passwort bestätigen:</label><br>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
+                        <span id="passwordError" style="color: red;"></span><br><br>
+                    </div>
+                <button type="submit" id="submit-button">Absenden</button>
+                </form>
+            </div>
+        </div>
 
     <?php
 
@@ -131,9 +148,10 @@ if ($_SESSION['a3m_logged_in'] === true) {?>
         $ende = htmlspecialchars($_POST['ende']);
         $boss = htmlspecialchars($_POST['boss']);
         $office = htmlspecialchars($_POST['office']);
+        $passwort = htmlspecialchars($_POST['password']);
         
         
-        shell_exec("powershell.exe -ExecutionPolicy Bypass -file ../../scripts/create-a3m-user.ps1 \"$vorname\" \"$nachname\" \"$position\" \"$standort\"  \"$firmen\" \"$abteilungen\" \"$durchwahl\" \"$ende\" $office \"$boss\"");
+        shell_exec("powershell.exe -ExecutionPolicy Bypass -file ../../scripts/create-a3m-user.ps1 \"$vorname\" \"$nachname\" \"$position\" \"$standort\"  \"$firmen\" \"$abteilungen\" \"$durchwahl\" \"$ende\" $office \"$boss\" \"$passwort\"");
         // Ausführen des Create-User-Skripts, und die Übergabe der HTML-Form-Variablen an das Powershell-Skript via Parameter
         
         #header("Location: ".$_SERVER['PHP_SELF']);

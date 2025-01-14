@@ -1,5 +1,5 @@
 <?php
-include("fp-header.php");
+include("tp-header.php");
 session_start(); // Hier prüfen wir, ob die Session des Benutzers vorhanden ist, da $_SESSION in dem Fall einen Wert zurückgibt.
 # Damit verhindern wir, dass ein Benutzer die Seite direkt mit der URL betreten, und somit den Login umgehen kann.
 # Ist die Session vorhanden, erscheint das Formular zum Eintragen der benötigten Userdaten
@@ -10,11 +10,11 @@ session_start(); // Hier prüfen wir, ob die Session des Benutzers vorhanden ist
 $errormessage = "Bitte tragen Sie alle benötigten Informationen ein!";
  
 // Test ob Session vorhanden ist
-if ($_SESSION['fp_logged_in'] === true) {?>
+if ($_SESSION['tp_logged_in'] === true) {?>
     <!DOCTYPE html>
     <html>
         <div class="form-container">
-            <h2>Neuer filmpool-Benutzer</h2>
+            <h2>Neuer Tower-Productions-Benutzer</h2>
             <div class="input-form" id="input-form">
                 <form method="post" onsubmit="return validatePasswords()">
                     <div class="form-group">
@@ -51,6 +51,7 @@ if ($_SESSION['fp_logged_in'] === true) {?>
                                 'groups_azure_a3md',
                                 'groups_azure_tp',
                                 'Jakob',
+                                'Köln',
                                 'Managed Service Accounts',
                                 'Microsoft Exchange Security Groups',
                                 'MMEcustomrecipients',
@@ -150,7 +151,7 @@ if ($_SESSION['fp_logged_in'] === true) {?>
         $passwort = htmlspecialchars($_POST['password']);
         
         
-        shell_exec("powershell.exe -ExecutionPolicy Bypass -file ../../scripts/create-fp-user.ps1 \"$vorname\" \"$nachname\" \"$position\" \"$standort\"  \"$firmen\" \"$abteilungen\" \"$durchwahl\" \"$ende\" $office \"$boss\" \"$passwort\"");
+        shell_exec("powershell.exe -ExecutionPolicy Bypass -file ../../scripts/create-tp-user.ps1 \"$vorname\" \"$nachname\" \"$position\" \"$standort\"  \"$firmen\" \"$abteilungen\" \"$durchwahl\" \"$ende\" $office \"$boss\" \"$passwort\"");
         // Ausführen des Create-User-Skripts, und die Übergabe der HTML-Form-Variablen an das Powershell-Skript via Parameter
         
         #header("Location: ".$_SERVER['PHP_SELF']);
@@ -158,6 +159,6 @@ if ($_SESSION['fp_logged_in'] === true) {?>
         // Damit schützen wir uns davor, dass der Benutzer zweimal die selbe Unit anlegt
         exit;
     }
-} else header("Location: fp-ldap.php"); # Umleitung der in Zweile 3-7 erklärten Login-Funktion
+} else header("Location: tp-ldap.php"); # Umleitung der in Zweile 3-7 erklärten Login-Funktion
 
 include '../footer.php';

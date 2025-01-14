@@ -14,12 +14,14 @@ if ($_SESSION['a3m_logged_in'] == true) {
     <form action="a3m-ldap-login.php" method="post">
         <input type="username" name="username" placeholder="Benutzername">
         <input type="password" name="password" placeholder="Passwort"><br><br>
-        <input type="submit" value="Login" id="box">
-    </form>
-
-    <form action="../index">
-        <button id="backtostart">Zurück zum Hauptmenü</button>
-    </form>
+    <div class="button-container">
+            <input type="submit" value="Login" id="box">
+        </form>
+    
+        <form action="../index">
+            <button id="backtostart">Zurück zum Hauptmenü</button>
+        </form>
+    </div>
 </body>
 
 <?php

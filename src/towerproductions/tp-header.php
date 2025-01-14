@@ -10,5 +10,5 @@
     <script src="../../js/updateOptions.js"></script>
 </head>
 <body>
-    <a href="../index"><img id="headerimg" style="width: 240px; height: 70px;" src="../../public/media/fp_logo_black.png"></a>
+    <a href="../index"><img id="headerimg" style="width: 180px; height: 77px;" src="../../public/media/tower_logo_black.png"></a>
 </body>

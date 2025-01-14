@@ -6,20 +6,22 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
 $dotenv->load();
 
 
-include_once 'fp-ldap.php';
+include_once 'tp-ldap.php';
 
 // Daten zur Authentifizierung
-$domain = $_ENV['FP_LDAP_DOMAIN']; // Domain für die LDAP-Authentifizierung
-$ldapconfig['host'] = $_ENV['FP_LDAP_HOST']; // LDAP-Server-Name
-$ldapconfig['port'] = $_ENV['FP_LDAP_PORT']; // LDAP-Standart-Port
-$ldapconfig['basedn'] = $_ENV['FP_LDAP_DN']; // Base-DN (Distinguished-Name)
+$domain = $_ENV['TP_LDAP_DOMAIN']; // Domain für die LDAP-Authentifizierung
+$ldapconfig['host'] = $_ENV['TP_LDAP_HOST']; // LDAP-Server-Name
+$ldapconfig['port'] = $_ENV['TP_LDAP_PORT']; // LDAP-Standart-Port = 389
+$ldapconfig['basedn'] = $_ENV['TP_LDAP_DN']; // Base-DN (Distinguished-Name)
 
 // $ds stellt eine Verbindung zum LDAP-Server her
 $ds = ldap_connect($ldapconfig['host'], $ldapconfig['port']);
 
+// LDAP-Verbindungsoptionen
 ldap_set_option($ds, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($ds, LDAP_OPT_REFERRALS, 0);
 ldap_set_option($ds, LDAP_OPT_NETWORK_TIMEOUT, 5);
+
 
 // Login-Funktion
 if (!empty($_POST['username']) && !empty($_POST['password']) ){
@@ -39,7 +41,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ){
             $attributes = array("SamAccountName", "CN", "userAccountControl");
             
             // Suche nach allen LDAP-Einträgen und wende die Filter an, gib diese anschließend in einem $userdata-Array aus
-            $sr=ldap_search($ds, 'DC=zentrale,DC=filmpool,DC=intern', $filter, $attributes);
+            $sr=ldap_search($ds, 'DC=ads,DC=mme,DC=de', $filter, $attributes);
             $info = ldap_get_entries($ds, $sr);
             $userdata = [];
 
@@ -54,7 +56,7 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ){
             $filter = "(objectClass=organizationalUnit)";
 
             // Führe die LDAP-Suche nach OUs aus
-            $sr=ldap_search($ds, 'DC=zentrale,DC=filmpool,DC=intern', $filter,["ou"]);
+            $sr=ldap_search($ds, 'DC=ads,DC=mme,DC=de', $filter,["ou"]);
             $info = ldap_get_entries($ds, $sr);
             #var_dump($info[22]["dn"]);
 
@@ -88,12 +90,12 @@ if (!empty($_POST['username']) && !empty($_POST['password']) ){
             session_start();
             $_SESSION['allous'] = $allOUs;
             $_SESSION['userdata'] = $userdata;
-            $_SESSION['fp_logged_in'] = true;
+            $_SESSION['tp_logged_in'] = true;
             #print '<pre>';
             #var_dump($_SESSION['allous']);
             #print '</pre>';
 
-            header("Location: create-fp-user.php");
+            header("Location: create-tp-user.php");
             exit();
     } else {
         // Zeige folgende Meldung, falls der Login nicht erfolgreich ist

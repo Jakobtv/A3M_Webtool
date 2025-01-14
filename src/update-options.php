@@ -55,7 +55,7 @@ if (isset($_POST['type'])) {
             $newOptions = [];
             foreach ($_SESSION['allous'][$selectedStandort][$selectedFirmen] as $value) {
                 // Firmen filtern, die in den excludedFirmen sind
-                if (!in_array($value, $excludedFirmen)) {
+                if (!in_array($value, $excludedAbteilungen)) {
                     $newOption = ["value" => $value];
                     array_push($newOptions, $newOption);
                 }

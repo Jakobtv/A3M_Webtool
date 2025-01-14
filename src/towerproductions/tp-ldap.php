@@ -1,9 +1,9 @@
 <?php
 session_start();
 error_reporting(E_ERROR);
-include 'fp-header.php';
-if ($_SESSION['fp_logged_in'] == true) {
-    header("Location: create-fp-user.php");
+include 'tp-header.php';
+if ($_SESSION['tp_logged_in'] == true) {
+    header("Location: create-tp-user.php");
     exit();
 } else
 
@@ -11,7 +11,7 @@ if ($_SESSION['fp_logged_in'] == true) {
 
 <body>
     <h3>Bitte geben Sie Ihre Kontoinformationen ein:</h3>
-    <form action="fp-ldap-login.php" method="post">
+    <form action="tp-ldap-login.php" method="post">
         <input type="username" name="username" placeholder="Benutzername">
         <input type="password" name="password" placeholder="Passwort"><br><br>
     <div class="button-container">

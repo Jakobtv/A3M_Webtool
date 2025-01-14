@@ -7,9 +7,8 @@
     <link rel="icon" href="../../public/media/a3m_logo_white.png">
     <title>A3M-LDAP-Manager</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../js/updateOptions.js"></script>
 </head>
 <body>
     <a href="../index"><img id="headerimg" style="width: 180px; height: 77px;" src="../../public/media/a3m_logo_black.png"></a>
 </body>
-<?php
-
